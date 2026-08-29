@@ -15,24 +15,31 @@ services:
         - mssqlsystem:/var/opt/mssql
         - mssqluser:/var/opt/sqlserver
         networks:
-        - internal_network
+            internal_network:
+                ipv4_address: 1.0.0.1
     backend:
         build: "./backend"
         ports:
         - "80:80"
         restart: unless-stopped
         networks:
-        - internal_network
+            internal_network:
+                ipv4_address: 1.0.0.2
     frontend:
         build: "./frontend"
         ports:
         - "8080:80"
         restart: unless-stopped
         networks:
-        - internal_network        
+            internal_network:
+                ipv4_address: 1.0.0.3              
 networks:
     internal_network:
         driver: bridge
+        ipam:
+            config:
+            - subnet: 1.0.0.0/29
+              gateway: 1.0.0.4        
 volumes:
     mssqlsystem:
         driver: local
