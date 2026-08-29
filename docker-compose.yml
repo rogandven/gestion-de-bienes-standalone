@@ -1,0 +1,40 @@
+services:
+    db:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        user: root
+        restart: unless-stopped
+        ports: 
+        - "${MSSQL_PORT:?error}:1433"
+        environment:
+            ACCEPT_EULA: Y
+            MSSQL_DATABASE: master
+            MSSQL_USER: sa
+            MSSQL_SA_PASSWORD: ${MSSQL_PASSWORD:?error}
+            MSSQL_PID: "Express"
+        volumes:
+        - mssqlsystem:/var/opt/mssql
+        - mssqluser:/var/opt/sqlserver
+        networks:
+        - internal_network
+    backend:
+        build: "./backend"
+        ports:
+        - "80:80"
+        restart: unless-stopped
+        networks:
+        - internal_network
+    frontend:
+        build: "./frontend"
+        ports:
+        - "8080:80"
+        restart: unless-stopped
+        networks:
+        - internal_network        
+networks:
+    internal_network:
+        driver: bridge
+volumes:
+    mssqlsystem:
+        driver: local
+    mssqluser:
+        driver: local        
