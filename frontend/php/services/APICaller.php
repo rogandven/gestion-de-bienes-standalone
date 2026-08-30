@@ -5,8 +5,9 @@
     }
     
     require __DIR__ . '/../classes/ServiceResponse.php';
+    require __DIR__ . '/../config/env.php';
 
-    define('API_BASE', 'http://1.0.0.2:80');
+    define('API_BASE', 'http://' . Env::BACKEND_IP . ':80');
 
     function callAPI($url) {
         try {

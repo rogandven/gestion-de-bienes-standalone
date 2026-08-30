@@ -1,13 +1,14 @@
 <?php
     require __DIR__ . '/../classes/DatabaseConnection.php';
+    require __DIR__ . '/env.php';
 
     $conn = new DatabaseConnection(
-        "1.0.0.1", 
+        Env::DATABASE_IP, 
         "sqlexpress", 
         1433, 
         "master", 
         "sa", 
-        "ABCD1234****####ROGERVENEGAS"
+        Env::MSSQL_PASSWORD
     );
 
     $conn->connectDatabase();

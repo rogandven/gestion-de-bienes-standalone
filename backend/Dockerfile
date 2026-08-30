@@ -1,5 +1,8 @@
 FROM php:8.3-apache
 
+ENV DATABASE_IP_2=${DATABASE_IP}
+ENV MSSQL_PASSWORD_2=${MSSQL_PASSWORD}
+
 # https://stackoverflow.com/questions/51933001/install-configure-sql-server-pdo-driver-for-php-docker-image#69644832
 ENV ACCEPT_EULA=Y
 USER root
@@ -19,4 +22,12 @@ docker-php-ext-enable sqlsrv pdo_sqlsrv && \
 rm /etc/apt/apt.conf.d/99myown
 
 COPY php/ /var/www/html/
+
+COPY createDotenv.sh /var/www/html/createDotenv.sh
+WORKDIR /var/www/html/
+
+RUN (chmod +x createDotenv.sh) && (mv createDotenv.sh createDotenv) && \
+./createDotenv ${DATABASE_IP_2} ${MSSQL_PASSWORD_2} && \
+rm createDotenv
+
 EXPOSE 80
