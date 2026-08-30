@@ -2,7 +2,7 @@
     require __DIR__ . '/../classes/DatabaseConnection.php';
 
     $conn = new DatabaseConnection(
-        "SQLExpress", 
+        "1.0.0.1", 
         "sqlexpress", 
         1433, 
         "master", 
