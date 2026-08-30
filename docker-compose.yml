@@ -21,6 +21,8 @@ services:
             internal_network:
                 ipv4_address: ${DATABASE_IP:?error}
     backend:
+        depends_on:
+        - db
         build: "./backend"
         ports:
         - "${BACKEND_PORT:?error}:80"
@@ -33,14 +35,16 @@ services:
             internal_network:
                 ipv4_address: ${BACKEND_IP:?error}
     frontend:
+        depends_on:
+        - backend
         build: "./frontend"
         ports:
         - "${FRONTEND_PORT:?error}:80"
         restart: unless-stopped
         environment:
-        - DATABASE_IP=1.0.0.1
-        - BACKEND_IP=1.0.0.2
-        - FRONTEND_IP=1.0.0.3        
+        - DATABASE_IP=${DATABASE_IP:?error}
+        - BACKEND_IP=${BACKEND_IP:?error}
+        - FRONTEND_IP=${FRONTEND_IP:?error}    
         networks:
             internal_network:
                 ipv4_address: ${FRONTEND_IP:?error}              
