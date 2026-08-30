@@ -4,17 +4,13 @@
 
 set -eou pipefail
 
-ENV_FILE="
-<?php
-    if (!defined('IS_PUBLIC')) {
-        header('Location: /');
-        die();
-    }    
-
-    class Env {
-        final public const BACKEND_IP = \""$1"\";
-    }
-?>
-"
-
-echo "$ENV_FILE" > ./config/env.php
+echo ""                                                     > ./config/env.php
+echo "<?php"                                                >> ./config/env.php
+echo "  if (!defined('IS_PUBLIC')) {"                       >> ./config/env.php
+echo "      header('Location: /');"                         >> ./config/env.php
+echo "      die();"                                         >> ./config/env.php
+echo "  }"                                                  >> ./config/env.php
+echo "  class Env {"                                        >> ./config/env.php
+echo "      final public const BACKEND_IP = '${1}';"        >> ./config/env.php
+echo "  }"                                                  >> ./config/env.php
+echo "?>"                                                   >> ./config/env.php
