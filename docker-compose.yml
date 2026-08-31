@@ -10,7 +10,7 @@ services:
         - MSSQL_DATABASE=master
         - MSSQL_USER=sa
         - MSSQL_SA_PASSWORD=${MSSQL_PASSWORD:?error}
-        - MSSQL_PID="Express"
+        - MSSQL_PID=Express
         - DATABASE_IP=${DATABASE_IP:?error}
         - BACKEND_IP=${BACKEND_IP:?error}
         - FRONTEND_IP=${FRONTEND_IP:?error}
@@ -21,7 +21,15 @@ services:
             internal_network:
                 ipv4_address: ${DATABASE_IP:?error}
     backend:
-        build: "./backend"
+        depends_on:
+        - db
+        build: 
+            context: ./backend
+            args:
+            - DATABASE_IP=${DATABASE_IP:?error}
+            - BACKEND_IP=${BACKEND_IP:?error}
+            - FRONTEND_IP=${FRONTEND_IP:?error}  
+            - MSSQL_PASSWORD=${MSSQL_PASSWORD:?error} 
         ports:
         - "${BACKEND_PORT:?error}:80"
         restart: unless-stopped
@@ -29,18 +37,26 @@ services:
         - DATABASE_IP=${DATABASE_IP:?error}
         - BACKEND_IP=${BACKEND_IP:?error}
         - FRONTEND_IP=${FRONTEND_IP:?error}
+        - MSSQL_PASSWORD=${MSSQL_PASSWORD:?error} 
         networks:
             internal_network:
                 ipv4_address: ${BACKEND_IP:?error}
     frontend:
-        build: "./frontend"
+        depends_on:
+        - backend
+        build: 
+            context: ./frontend
+            args:
+            - DATABASE_IP=${DATABASE_IP:?error}
+            - BACKEND_IP=${BACKEND_IP:?error}
+            - FRONTEND_IP=${FRONTEND_IP:?error} 
         ports:
         - "${FRONTEND_PORT:?error}:80"
         restart: unless-stopped
         environment:
-        - DATABASE_IP=1.0.0.1
-        - BACKEND_IP=1.0.0.2
-        - FRONTEND_IP=1.0.0.3        
+        - DATABASE_IP=${DATABASE_IP:?error}
+        - BACKEND_IP=${BACKEND_IP:?error}
+        - FRONTEND_IP=${FRONTEND_IP:?error}    
         networks:
             internal_network:
                 ipv4_address: ${FRONTEND_IP:?error}              
