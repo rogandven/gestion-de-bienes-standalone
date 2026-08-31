@@ -1,0 +1,5 @@
+{
+    "require": {
+        "mindplay/php-vite": "^1.1"
+    }
+}
