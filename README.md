@@ -38,11 +38,23 @@ Este proyecto utiliza una versión ligeramente modificada del conocido método d
 git clone https://github.com/rogandven/gestion-de-bienes-standalone.git
 ```
 3. Entrar a la carpeta raíz del repositorio.
-4. Correr el comando de construcción:
+4. Crear un archivo llamado `.env` con la siguiente sintaxis:
+```py
+DATABASE_IP='1.0.0.1' # Debe mantenerse igual
+BACKEND_IP='1.0.0.2' # Debe mantenerse igual
+FRONTEND_IP='1.0.0.3' # Debe mantenerse igual
+
+MSSQL_PORT=54321 # Puede ser cualquier número
+MSSQL_PASSWORD=ContraseniaSuperSegura # Puede ser cualquier cosa mientras siga las políticas de Microsoft
+
+BACKEND_PORT=8080 # Puede ser cualquier número
+FRONTEND_PORT=8090 # Puede ser cualquier número
+```
+5. Correr el comando de construcción:
 ```bat
 docker compose up -d --build
 ```
-5. Para iniciar sin volver a construír una nueva versión, correr el siguiente comando:
+6. Para iniciar sin volver a construír una nueva versión, correr el siguiente comando:
 ```bat
 docker compose up -d
 ```
