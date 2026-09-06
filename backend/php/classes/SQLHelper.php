@@ -6,7 +6,7 @@
 
     abstract class SQLHelper {
         public static function fetchQuery($conn, $query) {
-            $formattedQuery = ( sqlsrv_query($conn, $query) or die(print_r(sqlsrv_errors(), true) && sqlsrv_close($conn)) );
+            $formattedQuery = ( sqlsrv_query($conn, $query) or (die(print_r(sqlsrv_errors(), true) && sqlsrv_close($conn))) );
 
             $array = array();
             $i = 0;
