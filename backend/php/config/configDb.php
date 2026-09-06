@@ -16,5 +16,5 @@
         Env::MSSQL_PASSWORD
     );
 
-    $conn->connectDatabase();
+    $conn = $conn->connectDatabase() or die("No se pudo conectar con la base de datos");
 ?>
