@@ -5,8 +5,13 @@
     }    
 
     abstract class SQLHelper {
+        private static function dummy() {
+            return true;
+        }
+
         public static function fetchQuery($conn, $query) {
-            $formattedQuery = ( sqlsrv_query($conn, $query) or (die(print_r(sqlsrv_errors(), true) && sqlsrv_close($conn))) );
+            $formattedQuery = ( sqlsrv_query($conn, $query) );
+            $formattedQuery ? SQLHelper::dummy() : die(print_r(sqlsrv_errors()));
 
             $array = array();
             $i = 0;
@@ -21,9 +26,13 @@
 
         public static function executeQuery($conn, $query, $expectedRowAmount) {
             sqlsrv_begin_transaction($conn);
-            $formattedQuery = ( sqlsrv_query($conn, $query) or die(print_r(sqlsrv_errors(), true) && sqlsrv_close($conn)) );
+            
+            $formattedQuery = ( sqlsrv_query($conn, $query) );
+            $formattedQuery ? SQLHelper::dummy() : die(print_r(sqlsrv_errors()));
 
-            sqlsrv_execute($conn, $formattedQuery) or die(print_r(sqlsrv_errors(), true) && sqlsrv_close($conn));
+            $executed = sqlsrv_execute($conn, $formattedQuery);
+            $executed ? SQLHelper::dummy() : die(print_r(sqlsrv_errors()));
+
             $returnValue = (int)(sqlsrv_rows_affected($formattedQuery));
 
             if ( ($expectedRowAmount !== NULL) && (((int)$expectedRowAmount) !== $returnValue) ) {
