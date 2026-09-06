@@ -1,4 +1,9 @@
 <?php
+    if (!defined('IS_PUBLIC')) {
+        header("Location: /");
+        die();
+    }
+
     require __DIR__ . '/../classes/DatabaseConnection.php';
     require __DIR__ . '/env.php';
 
