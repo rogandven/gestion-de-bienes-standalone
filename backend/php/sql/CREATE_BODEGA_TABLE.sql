@@ -1,6 +1,6 @@
 IF OBJECT_ID('bodega') IS NULL BEGIN
 	CREATE TABLE bodega (
-		bod_codigo numeric(9, 0) NOT NULL PRIMARY KEY,
+		bod_codigo int NOT NULL PRIMARY KEY,
 		cmp_codigo int NOT NULL,
 		bod_descripcion varchar(50) NOT NULL,
 		mae_rut numeric(9, 0) NOT NULL,
