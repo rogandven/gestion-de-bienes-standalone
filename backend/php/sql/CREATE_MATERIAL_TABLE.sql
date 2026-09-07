@@ -1,7 +1,7 @@
 IF OBJECT_ID('material') IS NULL BEGIN
     CREATE TABLE material (
         ano_pdp	int NOT NULL,
-        bodega	int NOT NULL,
+        bodega int NOT NULL,
         nombre_material varchar(560) NOT NULL,
         sbo_stock_disponible numeric(18, 0) NOT NULL,
         ume_descripcion varchar(50) NOT NULL,
@@ -31,8 +31,8 @@ IF OBJECT_ID('material') IS NULL BEGIN
         mte_correlativo,
         dme_correlativo
         ) VALUES
-        (2026,1,'HOJAS DE PAPEL',500,'A4, ARTEL',1234,20,0,0,0,0,0),
-        (2026,1,'LAPICES DE MINA',200,'MEDIANOS, ARTEL',2453,20,0,0,0,0,0),
-        (2026,2,'NOTEBOOKS',300,'HP, HPG50G5, 2017',6424,20,0,0,0,0,0),
-        (2026,2,'TABLETS',500,'SAMSUNG, GALAXY TAB A4',6767,20,0,0,0,0,0);
+        (2026,2,'HOJAS DE PAPEL',500,'A4, ARTEL',1234,20,0,0,0,0,0),
+        (2026,2,'LAPICES DE MINA',200,'MEDIANOS, ARTEL',2453,20,0,0,0,0,0),
+        (2026,7,'NOTEBOOKS',300,'HP, HPG50G5, 2017',6424,20,0,0,0,0,0),
+        (2026,7,'TABLETS',500,'SAMSUNG, GALAXY TAB A4',6767,20,0,0,0,0,0);
 END;
