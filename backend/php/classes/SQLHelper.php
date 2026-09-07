@@ -26,12 +26,9 @@
 
         public static function executeQuery($conn, $query, $expectedRowAmount) {
             sqlsrv_begin_transaction($conn);
-            
+
             $formattedQuery = ( sqlsrv_query($conn, $query) );
             $formattedQuery ? SQLHelper::dummy() : die(print_r(sqlsrv_errors()));
-
-            $executed = sqlsrv_execute($conn, $formattedQuery);
-            $executed ? SQLHelper::dummy() : die(print_r(sqlsrv_errors()));
 
             $returnValue = (int)(sqlsrv_rows_affected($formattedQuery));
 
