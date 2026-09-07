@@ -5,6 +5,7 @@ IF OBJECT_ID('bodega') IS NULL BEGIN
 		bod_descripcion varchar(50) NOT NULL,
 		mae_rut numeric(9, 0) NOT NULL,
 		bod_direccion varchar(100) NOT NULL,
+		bod_fono varchar(50) NOT NULL,
 		bod_fax varchar(15) NOT NULL,
 		bod_mail varchar(50),
 		cco_codigo numeric(9, 0) NOT NULL,
