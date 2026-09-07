@@ -1,4 +1,4 @@
-IF OBJECT_ID('campus') IS NULL {
+IF OBJECT_ID('campus') IS NULL BEGIN
     CREATE TABLE campus (
         cmp_codigo int NOT NULL PRIMARY KEY,
         campus int NOT NULL,
@@ -9,7 +9,7 @@ IF OBJECT_ID('campus') IS NULL {
         (1,1,N'Concepción'),
         (2,2,N'Chillán'),
         (3,3,N'Los Ángeles');
-}
+END;
 
 
 
