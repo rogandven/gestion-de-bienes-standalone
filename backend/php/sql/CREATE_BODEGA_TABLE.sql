@@ -1,5 +1,5 @@
 CREATE TABLE bodega (
-	bod_codigo numeric(9, 0) NOT NULL,
+	bod_codigo numeric(9, 0) NOT NULL PRIMARY KEY,
 	cmp_codigo int NOT NULL,
 	bod_descripcion varchar(50) NOT NULL,
 	mae_rut numeric(9, 0) NOT NULL,
