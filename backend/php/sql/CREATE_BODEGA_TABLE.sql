@@ -15,7 +15,7 @@ IF OBJECT_ID('bodega') IS NULL BEGIN
 		CONSTRAINT FK_cmp_bodega FOREIGN KEY (cmp_codigo)
 			REFERENCES campus(cmp_codigo)
 		ON DELETE CASCADE
-		ON UPDATE CASCADE;
+		ON UPDATE CASCADE
 	);
 
 	INSERT INTO bodega (bod_codigo,cmp_codigo,bod_descripcion,mae_rut,bod_direccion,bod_fono,bod_fax,bod_mail,cco_codigo,cco_codigo_baja,bod_fecha_registro,bod_fecha_actualizacion,bod_login_actualizacion) VALUES
