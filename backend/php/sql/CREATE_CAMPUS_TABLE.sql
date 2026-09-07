@@ -1,4 +1,4 @@
-CREATE TABLE bodega (
+CREATE TABLE campus (
 	cmp_codigo int NOT NULL PRIMARY KEY,
     campus int NOT NULL,
     cmp_nombre char(30) NOT NULL,
