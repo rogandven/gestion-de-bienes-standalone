@@ -20,7 +20,7 @@
         }
 
         public function isPositive() {
-            return ($this->statusCode >= 400) && ($this->statusCode <= 0);
+            return ($this->statusCode <= 400);
         }
         public function isNegative() {
             return !($this->isPositive());

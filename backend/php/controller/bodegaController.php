@@ -13,9 +13,6 @@
 
         public static function getBodegas($conn, $campusId) {
             $result = ValidationService::validateInt($campusId, GeneralConstants::MIN_ID, GeneralConstants::MAX_ID, "CAMPUS_ID");
-
-            $result instanceof ServiceResponse ? BodegaController::dummy() : die();
-
             if ($result->isNegative()) {
                 return $result->getJSON();
             }
