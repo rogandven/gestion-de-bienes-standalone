@@ -18,5 +18,12 @@
         public function getJSON() {
             return json_encode($this);
         }
+
+        public function isPositive() {
+            return ($this->statusCode >= 400) && ($this->statusCode <= 0);
+        }
+        public function isNegative() {
+            return !($this->isPositive());
+        }
     }
 ?>
