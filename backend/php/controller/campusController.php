@@ -10,7 +10,7 @@
     abstract class CampusController {
         public static function getCampuses($conn) {
             $result = CampusService::getCampuses($conn);
-            return $result.getJSON();
+            return $result->getJSON();
         }
     }
 ?>
