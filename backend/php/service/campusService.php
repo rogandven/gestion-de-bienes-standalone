@@ -5,7 +5,8 @@
     }
 
     require __DIR__ . '/../classes/SQLHelper.php';   
-    
+    require __DIR__ . '/../classes/ServiceResponse.php'; 
+
     abstract class CampusService {
         public static function getCampuses($conn) {
             $response = NULL;
