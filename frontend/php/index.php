@@ -2,7 +2,7 @@
     define("IS_PUBLIC", true);
     require __DIR__.'/config/configLoader.php';
     require __DIR__.'/services/APICaller.php';
-    $tags = loadJSXComponents("src/main.tsx");
+    $tags = loadJSXComponents("src/main.jsx");
     $APIResponse = callAPI("/");
 ?>  
 

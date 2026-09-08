@@ -2,8 +2,17 @@
 
 FROM node:26-bookworm AS build
 
+ARG BACKEND_IP=${BACKEND_IP}
+ENV BACKEND_IP=${BACKEND_IP}
+
 ADD . /app
 WORKDIR /app/node
+
+COPY createDotenvNODE.sh /app/node/createDotenvNODE.sh
+RUN (chmod +x createDotenvNODE.sh) && (mv createDotenvNODE.sh createDotenvNODE) && \
+./createDotenvNODE ${BACKEND_IP} && \
+rm createDotenvNODE && ln -s /app/node/.env /app/node/src/.env
+
 RUN npm i && \
 npm run build && \
 mkdir /app/php/node -p && \
