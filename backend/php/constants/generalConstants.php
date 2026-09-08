@@ -5,7 +5,7 @@
     }
 
     abstract class GeneralConstants {
-        public static const int MIN_ID = 1;
-        public static const int MAX_ID = 256;
+        public const int MIN_ID = 1;
+        public const int MAX_ID = 256;
     }
 ?>
