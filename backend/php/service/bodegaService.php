@@ -28,7 +28,7 @@
                     b.cco_codigo_baja,
                     b.bod_fecha_registro,
                     b.bod_fecha_actualizacion,
-                    b.bod_login_actualizacion,
+                    b.bod_login_actualizacion
                     FROM bodega b JOIN campus c ON c.cmp_codigo = b.cmp_codigo 
                     WHERE c.cmp_codigo = " . $campusId . ";"
                 );
