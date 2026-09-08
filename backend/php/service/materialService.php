@@ -29,7 +29,7 @@
                     m.dme_correlativo
                 FROM material m WHERE m.bodega = " . $bodegaId . ";");
 
-                if ($materiales && is_array($materiales)) {
+                if (is_array($materiales)) {
                     $response = new ServiceResponse(200, "Material encontrado con éxito", $materiales);   
                 } else throw new Exception("Los materiales no son un arreglo");
             } catch (Exception $e) {
