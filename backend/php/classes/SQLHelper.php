@@ -11,7 +11,7 @@
 
         public static function fetchQuery($conn, $query) {
             $formattedQuery = ( sqlsrv_query($conn, $query) );
-            $formattedQuery ? SQLHelper::dummy() : die(error_log(json_encode(sqlsrv_errors())));
+            $formattedQuery ? SQLHelper::dummy() : die(error_log(json_encode(sqlsrv_errors()), 0));
 
             $array = array();
             $i = 0;
@@ -28,7 +28,7 @@
             sqlsrv_begin_transaction($conn);
 
             $formattedQuery = ( sqlsrv_query($conn, $query) );
-            $formattedQuery ? SQLHelper::dummy() : die(error_log(json_encode(sqlsrv_errors())));
+            $formattedQuery ? SQLHelper::dummy() : die(error_log(json_encode(sqlsrv_errors()), 0));
 
             $returnValue = (int)(sqlsrv_rows_affected($formattedQuery));
 

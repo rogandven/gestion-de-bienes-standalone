@@ -36,7 +36,7 @@
             $props = $this->getProps();
             $conn = sqlsrv_connect($props["1"], $props["2"]);
             if (!$conn) {
-                error_log(json_encode(sqlsrv_errors()));
+                error_log(json_encode(sqlsrv_errors()), 0);
                 die(print_r(json_encode(sqlsrv_errors()), true));
             }
             return $conn;
