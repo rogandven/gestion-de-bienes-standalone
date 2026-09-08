@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_BASE_URL ? import.meta.env.VITE_BASE_URL : (() => {throw Error("API mala XD")})();
+const API_URL = import.meta.env.VITE_API_URL || import.meta.env.API_URL || ((() => {throw new Error("API no encontrada")})()) 
 
 const instance = axios.create({
   baseURL: API_URL,
