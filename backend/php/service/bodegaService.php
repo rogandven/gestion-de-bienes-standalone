@@ -37,7 +37,7 @@
                     $response = new ServiceResponse(200, "Bodegas encontradas con éxito", $bodegas);
                 } else throw new Exception("Las bodegas no son un arreglo");
             } catch (Exception $e) {
-                error_log(json_encode($e), 0);
+                error_log(print_r($e, true), 0);
                 $response = new ServiceResponse(500, "Error interno del servidor", NULL);
             }
 
