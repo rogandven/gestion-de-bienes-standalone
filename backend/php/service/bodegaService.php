@@ -32,7 +32,8 @@
                     FROM bodega b JOIN campus c ON c.cmp_codigo = b.cmp_codigo 
                     WHERE c.cmp_codigo = " . $campusId . ";"
                 );
-                
+                SQLHelper::closeConnection($conn);
+
                 if (is_array($bodegas)) {
                     $response = new ServiceResponse(200, "Bodegas encontradas con éxito", $bodegas);
                 } else throw new Exception("Las bodegas no son un arreglo");

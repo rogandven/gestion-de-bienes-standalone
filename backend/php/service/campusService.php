@@ -13,7 +13,8 @@
 
             try {
                 $campuses = SQLHelper::fetchQuery($conn, "SELECT cmp_codigo, campus, cmp_nombre FROM campus;");
-
+                SQLHelper::closeConnection($conn);
+                
                 if (is_array($campuses)) {
                     $response = new ServiceResponse(200, "Campus encontrado con éxito", $campuses);   
                 } else throw new Exception("Los campus no son un arreglo");
