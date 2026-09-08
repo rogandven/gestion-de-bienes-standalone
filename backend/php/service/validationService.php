@@ -4,7 +4,7 @@
         die();
     }
 
-    require __DIR__ . '/../classes/ServiceResponse.php'; 
+    require_once __DIR__ . '/../classes/ServiceResponse.php'; 
 
     abstract class ValidationService {
         public static function validateInt($value, $min, $max, $FIELD_NAME) {

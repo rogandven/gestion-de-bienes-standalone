@@ -4,9 +4,9 @@
         die();
     }
 
-    require __DIR__ . '/../service/materialService.php'; 
-    require __DIR__ . '/../service/validationService.php'; 
-    require __DIR__ . '/../constants/generalConstants.php'; 
+    require_once __DIR__ . '/../service/materialService.php'; 
+    require_once __DIR__ . '/../service/validationService.php'; 
+    require_once __DIR__ . '/../constants/generalConstants.php'; 
 
     abstract class MaterialController {
         public static function getMateriales($conn, $bodegaId) {

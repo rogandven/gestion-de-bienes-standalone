@@ -4,8 +4,8 @@
         die();
     }
 
-    require __DIR__ . '/../service/campusService.php'; 
-    require __DIR__ . '/../service/validationService.php'; 
+    require_once __DIR__ . '/../service/campusService.php'; 
+    require_once __DIR__ . '/../service/validationService.php'; 
 
     abstract class CampusController {
         public static function getCampuses($conn) {

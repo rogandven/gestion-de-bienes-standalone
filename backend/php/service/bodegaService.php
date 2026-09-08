@@ -4,8 +4,8 @@
         die();
     }
 
-    require __DIR__ . '/../classes/SQLHelper.php';
-    require __DIR__ . '/../classes/ServiceResponse.php'; 
+    require_once __DIR__ . '/../classes/SQLHelper.php';
+    require_once __DIR__ . '/../classes/ServiceResponse.php'; 
     
     abstract class BodegaService {
         public static function getBodegas($conn, $campusId) {

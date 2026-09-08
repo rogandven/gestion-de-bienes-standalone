@@ -4,8 +4,8 @@
         die();
     }
 
-    require __DIR__ . '/../classes/DatabaseConnection.php';
-    require __DIR__ . '/env.php';
+    require_once __DIR__ . '/../classes/DatabaseConnection.php';
+    require_once __DIR__ . '/env.php';
 
     $conn = new DatabaseConnection(
         Env::DATABASE_IP, 

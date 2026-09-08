@@ -4,9 +4,9 @@
         die();
     }
 
-    require __DIR__ . '/../service/bodegaService.php'; 
-    require __DIR__ . '/../service/validationService.php';
-    require __DIR__ . '/../constants/generalConstants.php'; 
+    require_once __DIR__ . '/../service/bodegaService.php'; 
+    require_once __DIR__ . '/../service/validationService.php';
+    require_once __DIR__ . '/../constants/generalConstants.php'; 
 
     abstract class BodegaController {
         public static function getBodegas($conn, $campusId) {
