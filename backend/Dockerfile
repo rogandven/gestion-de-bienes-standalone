@@ -33,3 +33,5 @@ RUN (chmod +x createDotenv.sh) && (mv createDotenv.sh createDotenv) && \
 rm createDotenv
 
 EXPOSE 80
+
+CMD php ./config/configBootstrap.php && rm ./php/config/configBootstrap.php -f && apache2-foreground
