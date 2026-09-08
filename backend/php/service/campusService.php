@@ -12,10 +12,10 @@
             $response = NULL;
 
             try {
-                $campuses = SQLHelper::fetchQuery($conn, "SELECT cmp_codigo, campus, cmp_nombre FROM campus;");
+                $campuses = SQLHelper::fetchQuery($conn, "SELECT c.cmp_codigo, c.campus, c.cmp_nombre FROM campus c" . ";");
                 SQLHelper::closeConnection($conn);
-                
-                if (is_array($campuses)) {
+
+                if (is_array($campuses) && count($campuses) > 0) {
                     $response = new ServiceResponse(200, "Campus encontrado con éxito", $campuses);   
                 } else throw new Exception("Los campus no son un arreglo");
             } catch (Exception $e) {

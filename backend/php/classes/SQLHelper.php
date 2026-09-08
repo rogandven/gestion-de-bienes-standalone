@@ -11,17 +11,16 @@
 
         public static function fetchQuery($conn, $query) {
             $formattedQuery = ( sqlsrv_query($conn, $query) );
-            $formattedQuery ? SQLHelper::dummy() : die(error_log(json_encode(sqlsrv_errors()), 0));
 
-            $array = array();
-            $i = 0;
+            $arr = array();
 
-            while ($current = sqlsrv_fetch_object($formattedQuery)) {
-                ($array[$i] = $current) && $i+=1;
+            while ($current = sqlsrv_fetch_array($formattedQuery, SQLSRV_FETCH_ASSOC)) {
+                // echo "CURRENT: " . print_r($current, true) . "\n";
+                array_push($arr, $current);
             }
 
             sqlsrv_free_stmt($formattedQuery);
-            return $array;
+            return $arr;
         }
 
         public static function executeQuery($conn, $query, $expectedRowAmount) {
