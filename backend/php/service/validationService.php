@@ -8,7 +8,7 @@
 
     abstract class ValidationService {
         public static function validateInt($value, $min, $max, $FIELD_NAME) {
-            if ($value !== (int)$value) {
+            if ($value != (int)$value) {
                 return new ServiceResponse(400, $FIELD_NAME . " debe ser un número", NULL);
             }
             $value = (int)$value;
