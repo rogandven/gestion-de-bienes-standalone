@@ -4,7 +4,7 @@ function BodegaPicker({ bodegas, onChange }) {
         <select defaultValue={undefined} value={undefined}>
             {Array.isArray(bodegas) && bodegas.map((bodega, index) => {
                 return <option value={bodega?.cmp_codigo || index} key={"bodega-" + index}>
-                  {bodega?.bod_nombre || "[BODEGA DESCONOCIDA]"}
+                  {bodega?.bod_descripcion || "[BODEGA DESCONOCIDA]"}
                 </option>
             })}
         </select>
