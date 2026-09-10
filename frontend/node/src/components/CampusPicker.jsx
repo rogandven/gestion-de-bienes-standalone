@@ -1,4 +1,6 @@
-function CampusPicker(campuses) {
+function CampusPicker({ campuses }) {
+  // console.log("CampusPicker campuses: ", campuses);
+
   return (
     <>
         <select>
