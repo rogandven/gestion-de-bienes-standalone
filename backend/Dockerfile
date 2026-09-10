@@ -2,8 +2,13 @@ FROM php:8.3-apache
 
 ARG DATABASE_IP=${DATABASE_IP}
 ARG MSSQL_PASSWORD=${MSSQL_PASSWORD}
+ARG APP_HOST=${APP_HOST}
+ARG FRONTEND_PORT=${FRONTEND_PORT}
+
 ENV DATABASE_IP=${DATABASE_IP}
 ENV MSSQL_PASSWORD=${MSSQL_PASSWORD}
+ENV APP_HOST=${APP_HOST}
+ENV FRONTEND_PORT=${FRONTEND_PORT}
 
 # https://stackoverflow.com/questions/51933001/install-configure-sql-server-pdo-driver-for-php-docker-image#69644832
 ENV ACCEPT_EULA=Y
@@ -21,7 +26,7 @@ apt-get -y --no-install-recommends install msodbcsql17 unixodbc-dev --allow-unau
 pecl install sqlsrv && \
 pecl install pdo_sqlsrv && \
 docker-php-ext-enable sqlsrv pdo_sqlsrv && \
-rm /etc/apt/apt.conf.d/99myown
+rm /etc/apt/apt.conf.d/99myown && rm /etc/apt/sources.list.d/mssql-release.list && a2enmod headers
 
 COPY php/ /var/www/html/
 
@@ -31,6 +36,11 @@ WORKDIR /var/www/html/
 RUN (chmod +x createDotenv.sh) && (mv createDotenv.sh createDotenv) && \
 ./createDotenv ${DATABASE_IP} ${MSSQL_PASSWORD} && \
 rm createDotenv
+
+COPY enableCORS.sh /var/www/html/enableCORS.sh
+RUN (chmod +x enableCORS.sh) && (mv enableCORS.sh enableCORS) && \
+./enableCORS ${APP_HOST} ${FRONTEND_PORT} && \
+rm enableCORS
 
 EXPOSE 80
 

@@ -2,6 +2,10 @@
 
 FROM node:26-bookworm AS build
 
+ARG APP_HOST=${APP_HOST}
+ENV APP_HOST=${APP_HOST}
+ARG BACKEND_PORT=${BACKEND_PORT}
+ENV BACKEND_PORT=${BACKEND_PORT}
 ARG BACKEND_IP=${BACKEND_IP}
 ENV BACKEND_IP=${BACKEND_IP}
 
@@ -10,16 +14,18 @@ WORKDIR /app/node
 
 COPY createDotenvNODE.sh /app/node/createDotenvNODE.sh
 RUN (chmod +x createDotenvNODE.sh) && (mv createDotenvNODE.sh createDotenvNODE) && \
-./createDotenvNODE ${BACKEND_IP} && \
-rm createDotenvNODE && ln -s /app/node/.env /app/node/src/.env
-
-RUN npm i && \
+./createDotenvNODE "${APP_HOST}:${BACKEND_PORT}/api" && \
+rm createDotenvNODE && ln -s /app/node/.env /app/node/src/.env && npm i && \
 npm run build && \
 mkdir /app/php/node -p && \
 mv dist /app/php/node
 
 FROM php:8.2-apache AS server 
 
+ARG APP_HOST=${APP_HOST}
+ENV APP_HOST=${APP_HOST}
+ARG BACKEND_PORT=${BACKEND_PORT}
+ENV BACKEND_PORT=${BACKEND_PORT}
 ARG BACKEND_IP=${BACKEND_IP}
 ENV BACKEND_IP=${BACKEND_IP}
 
@@ -32,7 +38,7 @@ COPY createDotenv.sh /var/www/html/createDotenv.sh
 WORKDIR /var/www/html/
 
 RUN (chmod +x createDotenv.sh) && (mv createDotenv.sh createDotenv) && \
-./createDotenv ${BACKEND_IP} && \
+./createDotenv ${BACKEND_IP}  && \
 rm createDotenv
 
 EXPOSE 80
