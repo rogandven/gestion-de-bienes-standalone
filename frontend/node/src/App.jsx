@@ -3,6 +3,7 @@ import { getCampus } from './service/campus.service.js';
 import CampusPicker from "./components/CampusPicker.jsx";
 import BodegaPicker from "./components/BodegaPicker.jsx";
 import MaterialTable from "./components/MaterialTable.jsx";
+import MaterialSearcher from "./components/MaterialSearcher.jsx";
 
 import useGetCampuses from './hooks/useGetCampuses.jsx';
 import useGetBodegas from "./hooks/useGetBodegas.jsx";
@@ -15,6 +16,8 @@ function App() {
   const [bodegas, fetchBodegas] = useGetBodegas();
   const [materiales, fetchMateriales] = useGetMateriales();
 
+  const [newMateriales, setNewMateriales] = useState([]);
+
   const [selectedCampus, setSelectedCampus] = useState(0);
   const [selectedBodega, setSelectedBodega] = useState(0);
 
@@ -26,7 +29,7 @@ function App() {
         selectedCampus={selectedCampus}
         setSelectedCampus={setSelectedCampus}
         setSelectedBodega={setSelectedBodega}
-        resetMateriales={ () => {fetchMateriales(null)} }
+        resetMateriales={ () => {fetchMateriales(null) && setNewMateriales(null)} }
       />
       <BodegaPicker 
         bodegas={bodegas} 
@@ -34,7 +37,8 @@ function App() {
         selectedBodega={selectedBodega}
         setSelectedBodega={setSelectedBodega}
       />
-      <MaterialTable materiales={materiales} />
+      <MaterialSearcher materiales={materiales} setNewMateriales={setNewMateriales}/>
+      <MaterialTable materiales={newMateriales} />
     </>
   )
 }
