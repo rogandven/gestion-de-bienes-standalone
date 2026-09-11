@@ -1,23 +1,32 @@
 import { useState } from "react";
 
-function CampusPicker({ campuses, fetchBodegas }) {
-  const [selectedValue, setSelectedValue] = useState(0);
-
+function CampusPicker({ 
+  campuses, 
+  fetchBodegas, 
+  selectedCampus,
+  setSelectedCampus,
+  setSelectedBodega,
+  resetMateriales, 
+}) {
   const handleChange = (e) => {
-    setSelectedValue(e.target.value);
+    setSelectedCampus(e.target.value);
     fetchBodegas(Number(e.target.value));
+    setSelectedBodega(0);
+    resetMateriales();
   }
 
   return (
     <>
-        <select defaultValue={0} value={selectedValue} onChange={handleChange}>
+      {Array.isArray(campuses) && campuses.length > 0 && 
+        <select defaultValue={undefined} value={selectedCampus} onChange={handleChange}>
+            <option disabled selected value={0}> -- Selecciona un Campus -- </option>
             {Array.isArray(campuses) && campuses.map((campus, index) => {
                 return <option value={campus?.cmp_codigo} key={"campus-" + campus?.cmp_codigo}>
                   {campus?.cmp_nombre || "[CAMPUS DESCONOCIDO]"}
                 </option>
             })}
         </select>
-        <p>{`¡Has seleccionado ${selectedValue}!`}</p>
+      }
     </>
   )
 }
