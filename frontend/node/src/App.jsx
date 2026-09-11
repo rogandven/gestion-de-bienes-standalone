@@ -15,10 +15,12 @@ import { DEFAULT_CAMPUS_ID } from "./constants/campus.constants.js";
 function App() {
   const campuses = useGetCampuses();
   const [bodegas, fetchBodegas] = useGetBodegas();
-  const [materiales, fetchMateriales] = useGetMateriales();
+  const [materiales, fetchMateriales, resetMateriales] = useGetMateriales();
 
   const [selectedCampus, setSelectedCampus] = useState(DEFAULT_CAMPUS_ID);
   const [selectedBodega, setSelectedBodega] = useState(DEFAULT_CAMPUS_ID);
+
+  const [query, setQuery] = useState("");
 
   return (
     <>
@@ -28,6 +30,7 @@ function App() {
         setSelectedCampus={setSelectedCampus}
         fetchBodegas={fetchBodegas}
         setSelectedBodega={setSelectedBodega}
+        resetMateriales={resetMateriales}
       />
       <BodegaPicker
         bodegas={bodegas}
@@ -36,8 +39,8 @@ function App() {
         selectedCampus={selectedCampus}
         fetchMateriales={fetchMateriales}
       />
-      <MaterialSearcher />
-      <MaterialTable materiales={materiales}/>
+      <MaterialSearcher query={query} setQuery={setQuery} />
+      <MaterialTable materiales={materiales} query={query} />
     </>
   )
 }

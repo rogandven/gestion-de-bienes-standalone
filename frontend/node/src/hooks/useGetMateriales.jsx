@@ -12,7 +12,11 @@ export const useGetMateriales = () => {
         } else setMateriales([]);
     }
 
-    return [materiales, fetchMateriales];
+    const resetMateriales = () => {
+        setMateriales([]);
+    }
+
+    return [materiales, fetchMateriales, resetMateriales];
 }
 
 export default useGetMateriales;

@@ -1,23 +1,16 @@
 import { useState } from "react";
 
 function MaterialSearcher({ 
-    materiales,
-    setNewMateriales,
+    query,
+    setQuery,
 }) {
-
-
     const handleChange = (e) => {
-        setNewMateriales(Array.isArray(materiales) ? materiales.filter((m) => {
-            return String(m.nombre_material).includes(e?.target?.value || "") ||
-            String(m.ume_descripcion).includes(e?.target?.value || "");
-        }) : []);
+        setQuery(e.target.value);
     }
 
     return (
         <>
-        {Array.isArray(materiales) && materiales.length > 0 && 
-            <input type="text" id="material-search" onChange={handleChange} placeholder="Buscar..."></input>
-        }
+            <input type="text" id="material-search" value={query} onChange={handleChange} placeholder="Buscar..."></input>
         </>
     )
 }
