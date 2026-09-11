@@ -9,6 +9,7 @@ import useGetCampuses from './hooks/useGetCampuses.jsx';
 import useGetBodegas from "./hooks/useGetBodegas.jsx";
 import useGetMateriales from "./hooks/useGetMateriales.jsx";
 import { useState } from "react";
+import { DEFAULT_CAMPUS_ID } from "./constants/campus.constants.js";
 
 
 function App() {
@@ -16,29 +17,27 @@ function App() {
   const [bodegas, fetchBodegas] = useGetBodegas();
   const [materiales, fetchMateriales] = useGetMateriales();
 
-  const [newMateriales, setNewMateriales] = useState([]);
-
-  const [selectedCampus, setSelectedCampus] = useState(0);
-  const [selectedBodega, setSelectedBodega] = useState(0);
+  const [selectedCampus, setSelectedCampus] = useState(DEFAULT_CAMPUS_ID);
+  const [selectedBodega, setSelectedBodega] = useState(DEFAULT_CAMPUS_ID);
 
   return (
     <>
       <CampusPicker 
-        campuses={campuses} 
-        fetchBodegas={fetchBodegas} 
+        campuses={campuses}
         selectedCampus={selectedCampus}
         setSelectedCampus={setSelectedCampus}
+        fetchBodegas={fetchBodegas}
         setSelectedBodega={setSelectedBodega}
-        resetMateriales={ () => {fetchMateriales(null) && setNewMateriales(null)} }
       />
-      <BodegaPicker 
-        bodegas={bodegas} 
-        fetchMateriales={fetchMateriales}
+      <BodegaPicker
+        bodegas={bodegas}
         selectedBodega={selectedBodega}
         setSelectedBodega={setSelectedBodega}
+        selectedCampus={selectedCampus}
+        fetchMateriales={fetchMateriales}
       />
-      <MaterialSearcher materiales={materiales} setNewMateriales={setNewMateriales}/>
-      <MaterialTable materiales={newMateriales} />
+      <MaterialSearcher />
+      <MaterialTable materiales={materiales}/>
     </>
   )
 }

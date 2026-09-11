@@ -15,3 +15,5 @@ export const DEFAULT_CAMPUS_ARRAY = [
         cmp_nombre: "Los Ángeles",
     },
 ];
+
+export const DEFAULT_CAMPUS_ID: number = 0;

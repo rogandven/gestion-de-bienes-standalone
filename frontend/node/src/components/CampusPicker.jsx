@@ -1,32 +1,34 @@
 import { useState } from "react";
+import { DEFAULT_CAMPUS_ID } from "../constants/campus.constants";
+import { DEBUG_PRINTS } from "../constants/config.constants";
+import { DEFAULT_BODEGA_ID } from "../constants/bodega.constants";
 
 function CampusPicker({ 
-  campuses, 
-  fetchBodegas, 
+  campuses,
   selectedCampus,
   setSelectedCampus,
+  fetchBodegas,
   setSelectedBodega,
-  resetMateriales, 
 }) {
   const handleChange = (e) => {
     setSelectedCampus(e.target.value);
-    fetchBodegas(Number(e.target.value));
-    setSelectedBodega(0);
-    resetMateriales();
+    fetchBodegas(e.target.value);
+    setSelectedBodega(DEFAULT_BODEGA_ID);
   }
 
   return (
     <>
-      {Array.isArray(campuses) && campuses.length > 0 && 
-        <select defaultValue={undefined} value={selectedCampus} onChange={handleChange}>
-            <option disabled selected value={0}> -- Selecciona un Campus -- </option>
-            {Array.isArray(campuses) && campuses.map((campus, index) => {
+      {
+        <select defaultValue={DEFAULT_CAMPUS_ID} value={selectedCampus} onChange={handleChange}>
+            <option disabled selected value={DEFAULT_CAMPUS_ID}> -- Selecciona un Campus -- </option>
+            {campuses.map((campus, index) => {
                 return <option value={campus?.cmp_codigo} key={"campus-" + campus?.cmp_codigo}>
                   {campus?.cmp_nombre || "[CAMPUS DESCONOCIDO]"}
                 </option>
             })}
         </select>
       }
+      <p>{DEBUG_PRINTS && `CAMPUS_PICKER: ${selectedCampus} seleccionado`}</p>
     </>
   )
 }
