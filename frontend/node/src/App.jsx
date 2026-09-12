@@ -15,6 +15,7 @@ import { DEFAULT_CAMPUS_ID } from "./constants/campus.constants.js";
 import { filterMateriales } from "./utils/material.utils.js";
 
 import PaginationHelper from "./classes/PaginationHelper.js";
+import PageSwitcher from "./components/PageSwitcher.jsx";
 
 
 function App() {
@@ -27,7 +28,8 @@ function App() {
   const [query, setQuery] = useState("");
 
   const newMateriales = filterMateriales(materiales, query);
-  const paginationHelper = new PaginationHelper(newMateriales, 10, currentPage);
+  const paginationHelper = new PaginationHelper(newMateriales, 2, currentPage);
+  console.log("PAGE INDEX: ", paginationHelper.pageIndex);
   return (
     <>
       <CampusPicker 
@@ -45,8 +47,12 @@ function App() {
         selectedCampus={selectedCampus}
         fetchMateriales={fetchMateriales}
       />
-      <MaterialSearcher query={query} setQuery={setQuery} />
+      <MaterialSearcher 
+        query={query} 
+        setQuery={setQuery} 
+      />
       <MaterialTable materiales={newMateriales} query={query} paginationHelper={paginationHelper} />
+      <PageSwitcher paginationHelper={paginationHelper} nextPage={nextPage} previousPage={previousPage} /> 
     </>
   )
 }

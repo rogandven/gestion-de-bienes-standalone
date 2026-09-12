@@ -8,6 +8,7 @@ export default class PaginationHelper {
     }
 
     private static correct(a: number) {
+        console.log("PRE-CORRECTED PAGE INDEX: ", a);
         if (Number.isNaN(a)) {
             return 0;
         }
@@ -77,6 +78,7 @@ export default class PaginationHelper {
 
     public constructor(items: unknown[], itemsPerPage: number, pageIndex: number) {
         this.itemAmount = items.length;
+        console.log("GIVEN PAGE INDEX: ", pageIndex);
         this.pageIndex = pageIndex;
         this.itemsPerPage = itemsPerPage;
         this.pageStart = itemsPerPage * pageIndex;
