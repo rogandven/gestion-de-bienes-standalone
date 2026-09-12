@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function MaterialTable({ materiales, paginationHelper }) {
-    if (!materiales) {
+    if (!Array.isArray(materiales) || materiales.length <= 0) {
         return <div/>;
     }
 
