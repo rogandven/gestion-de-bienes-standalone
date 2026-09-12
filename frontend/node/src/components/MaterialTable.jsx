@@ -1,24 +1,27 @@
 import { useState } from "react";
 
-function MaterialTable({ materiales, query }) {
-    const filterFunction = ((material, query) => {
-        console.log("material: ", material?.nombre_material);
-        console.log("query: ", query);
-        return (
-            (String(material?.nombre_material)
-                .toUpperCase().includes(
-                    String(query || "").trim().toUpperCase()
-            )) ||
-            (String(material?.ume_descripcion)
-                .toUpperCase().includes(
-                    String(query || "").trim().toUpperCase()
-            ))
+function MaterialTable({ materiales, paginationHelper }) {
+    if (!materiales) {
+        return <div/>;
+    }
+
+    const JSXArray = [];
+    
+    for (let i = paginationHelper.pageStart; i < paginationHelper.pageEnd; i++) {
+        // console.log(`i = ${i}`);
+        JSXArray.push(
+            <tr key={`material-${i}`}>
+                <td>{materiales[i]?.nombre_material || "-"}</td>
+                <td>{materiales[i]?.ume_descripcion || "-"}</td>
+                <td>{"$" + (materiales[i]?.sbo_valor || "0")}</td>
+                <td>{materiales[i]?.sbo_stock_disponible || "0"}</td>
+            </tr>
         );
-    });
+    }
 
     return (
         <>
-            {Array.isArray(materiales) && materiales.length > 0 &&
+            {materiales &&
                 <table>
                     <tr key="materiales-headers">
                         <th>Nombre</th>
@@ -26,18 +29,7 @@ function MaterialTable({ materiales, query }) {
                         <th>Precio</th>
                         <th>Stock</th>
                     </tr>
-                    {materiales.filter((material) => {return filterFunction(material, query)}).map((material, index) =>
-                        {
-                            return (
-                                <tr key={`material-${index}`}>
-                                    <td>{material?.nombre_material || "-"}</td>
-                                    <td>{material?.ume_descripcion || "-"}</td>
-                                    <td>{"$" + (material?.sbo_valor || "0")}</td>
-                                    <td>{material?.sbo_stock_disponible || "0"}</td>
-                                </tr>
-                            )
-                        }
-                    )}
+                    {JSXArray.map((e) => e)}
                 </table>
             }
         </>

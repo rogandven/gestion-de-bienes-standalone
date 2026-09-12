@@ -8,20 +8,26 @@ import MaterialSearcher from "./components/MaterialSearcher.jsx";
 import useGetCampuses from './hooks/useGetCampuses.jsx';
 import useGetBodegas from "./hooks/useGetBodegas.jsx";
 import useGetMateriales from "./hooks/useGetMateriales.jsx";
+import useChangePage from "./hooks/useChangePage.jsx";
 import { useState } from "react";
 import { DEFAULT_CAMPUS_ID } from "./constants/campus.constants.js";
+
+import { filterMateriales } from "./utils/material.utils.js";
+
+import PaginationHelper from "./classes/PaginationHelper.js";
 
 
 function App() {
   const campuses = useGetCampuses();
   const [bodegas, fetchBodegas] = useGetBodegas();
   const [materiales, fetchMateriales, resetMateriales] = useGetMateriales();
-
+  const [currentPage, nextPage, previousPage] = useChangePage();
   const [selectedCampus, setSelectedCampus] = useState(DEFAULT_CAMPUS_ID);
   const [selectedBodega, setSelectedBodega] = useState(DEFAULT_CAMPUS_ID);
-
   const [query, setQuery] = useState("");
 
+  const newMateriales = filterMateriales(materiales, query);
+  const paginationHelper = new PaginationHelper(newMateriales, 10, currentPage);
   return (
     <>
       <CampusPicker 
@@ -40,7 +46,7 @@ function App() {
         fetchMateriales={fetchMateriales}
       />
       <MaterialSearcher query={query} setQuery={setQuery} />
-      <MaterialTable materiales={materiales} query={query} />
+      <MaterialTable materiales={newMateriales} query={query} paginationHelper={paginationHelper} />
     </>
   )
 }
