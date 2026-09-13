@@ -11,9 +11,6 @@ services:
         - MSSQL_USER=sa
         - MSSQL_SA_PASSWORD=${MSSQL_PASSWORD:?error}
         - MSSQL_PID=Express
-        - DATABASE_IP=${DATABASE_IP:?error}
-        - BACKEND_IP=${BACKEND_IP:?error}
-        - FRONTEND_IP=${FRONTEND_IP:?error}
         volumes:
         - mssqlsystem:/var/opt/mssql
         - mssqluser:/var/opt/sqlserver
@@ -26,18 +23,18 @@ services:
         build: 
             context: ./backend
             args:
-            - DATABASE_IP=${DATABASE_IP:?error}
-            - BACKEND_IP=${BACKEND_IP:?error}
-            - FRONTEND_IP=${FRONTEND_IP:?error}  
+            - DATABASE_IP=${DATABASE_IP:?error}  
             - MSSQL_PASSWORD=${MSSQL_PASSWORD:?error} 
+            - APP_HOST=${APP_HOST:?error}
+            - FRONTEND_PORT=${FRONTEND_PORT:?error} 
         ports:
         - "${BACKEND_PORT:?error}:80"
         restart: unless-stopped
         environment:
         - DATABASE_IP=${DATABASE_IP:?error}
-        - BACKEND_IP=${BACKEND_IP:?error}
-        - FRONTEND_IP=${FRONTEND_IP:?error}
         - MSSQL_PASSWORD=${MSSQL_PASSWORD:?error} 
+        - APP_HOST=${APP_HOST:?error}
+        - FRONTEND_PORT=${FRONTEND_PORT:?error}        
         networks:
             internal_network:
                 ipv4_address: ${BACKEND_IP:?error}
@@ -47,16 +44,16 @@ services:
         build: 
             context: ./frontend
             args:
-            - DATABASE_IP=${DATABASE_IP:?error}
+            - APP_HOST=${APP_HOST:?error}
+            - BACKEND_PORT=${BACKEND_PORT:?error}
             - BACKEND_IP=${BACKEND_IP:?error}
-            - FRONTEND_IP=${FRONTEND_IP:?error} 
         ports:
         - "${FRONTEND_PORT:?error}:80"
         restart: unless-stopped
         environment:
-        - DATABASE_IP=${DATABASE_IP:?error}
+        - APP_HOST=${APP_HOST:?error}
+        - BACKEND_PORT=${BACKEND_PORT:?error}
         - BACKEND_IP=${BACKEND_IP:?error}
-        - FRONTEND_IP=${FRONTEND_IP:?error}    
         networks:
             internal_network:
                 ipv4_address: ${FRONTEND_IP:?error}              

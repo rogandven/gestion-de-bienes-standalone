@@ -49,6 +49,8 @@ MSSQL_PASSWORD=ContraseniaSuperSegura # Puede ser cualquier cosa mientras siga l
 
 BACKEND_PORT=8080 # Puede ser cualquier número
 FRONTEND_PORT=8090 # Puede ser cualquier número
+
+APP_HOST=http://123.456.789.101 # Debe ser la IP del servidor junto con su respectivo protocolo. NO se puede utilizar localhost en producción
 ```
 5. Correr el comando de construcción:
 ```bat
