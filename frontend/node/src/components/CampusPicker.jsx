@@ -1,17 +1,37 @@
-function CampusPicker(campuses) {
+import { useState } from "react";
+import { DEFAULT_CAMPUS_ID } from "../constants/campus.constants";
+import { DEBUG_PRINTS } from "../constants/config.constants";
+import { DEFAULT_BODEGA_ID } from "../constants/bodega.constants";
+
+function CampusPicker({ 
+  campuses,
+  selectedCampus,
+  setSelectedCampus,
+  fetchBodegas,
+  setSelectedBodega,
+  resetMateriales,
+  resetPage,
+}) {
+  const handleChange = (e) => {
+    setSelectedCampus(e.target.value);
+    fetchBodegas(e.target.value);
+    setSelectedBodega(DEFAULT_BODEGA_ID);
+    resetMateriales();
+    resetPage();
+  }
+
   return (
     <>
-        <select>
+      {
+        <select defaultValue={DEFAULT_CAMPUS_ID} value={selectedCampus} onChange={handleChange}>
+            <option disabled selected value={DEFAULT_CAMPUS_ID}> -- Selecciona un Campus -- </option>
             {campuses.map((campus, index) => {
-                return <option value={campus?.cmp_codigo || index} key={"campus-" + index}>
+                return <option value={campus?.cmp_codigo} key={"campus-" + campus?.cmp_codigo}>
                   {campus?.cmp_nombre || "[CAMPUS DESCONOCIDO]"}
                 </option>
             })}
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
         </select>
-
+      }
     </>
   )
 }
