@@ -2,7 +2,7 @@ export default class PaginationHelper {
     private static mod(a: number, b: number) {
         let rem: number;
         if  ((rem = a % b) < 0) {
-            rem = a + rem;
+            rem = b + rem;
         }
         return rem;
     }
@@ -12,7 +12,7 @@ export default class PaginationHelper {
         if (Number.isNaN(a)) {
             return 0;
         }
-        return Math.abs(Math.floor(a));
+        return Math.abs(Math.ceil(a));
     }
 
     private static div(a: number, b: number) {
@@ -78,11 +78,10 @@ export default class PaginationHelper {
 
     public constructor(items: unknown[], itemsPerPage: number, pageIndex: number) {
         this.itemAmount = items.length;
-        console.log("GIVEN PAGE INDEX: ", pageIndex);
-        this.pageIndex = pageIndex;
         this.itemsPerPage = itemsPerPage;
-        this.pageStart = itemsPerPage * pageIndex;
-        this.pageEnd = this.pageStart + itemsPerPage;
         this.pageAmount = PaginationHelper.div(this.itemAmount, this.itemsPerPage);
+        this.pageIndex = pageIndex;
+        this.pageStart = this.itemsPerPage * this.pageIndex;
+        this.pageEnd = this.pageStart + this.itemsPerPage;
     }
 }
