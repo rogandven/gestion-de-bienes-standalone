@@ -10,12 +10,14 @@ function CampusPicker({
   fetchBodegas,
   setSelectedBodega,
   resetMateriales,
+  resetPage,
 }) {
   const handleChange = (e) => {
     setSelectedCampus(e.target.value);
     fetchBodegas(e.target.value);
     setSelectedBodega(DEFAULT_BODEGA_ID);
     resetMateriales();
+    resetPage();
   }
 
   return (
@@ -30,7 +32,6 @@ function CampusPicker({
             })}
         </select>
       }
-      <p>{DEBUG_PRINTS && `CAMPUS_PICKER: ${selectedCampus} seleccionado`}</p>
     </>
   )
 }

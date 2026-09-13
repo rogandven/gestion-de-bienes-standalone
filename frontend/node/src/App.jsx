@@ -22,14 +22,15 @@ function App() {
   const campuses = useGetCampuses();
   const [bodegas, fetchBodegas] = useGetBodegas();
   const [materiales, fetchMateriales, resetMateriales] = useGetMateriales();
-  const [currentPage, nextPage, previousPage] = useChangePage();
+  const [currentPage, nextPage, previousPage, resetPage] = useChangePage();
   const [selectedCampus, setSelectedCampus] = useState(DEFAULT_CAMPUS_ID);
   const [selectedBodega, setSelectedBodega] = useState(DEFAULT_CAMPUS_ID);
   const [query, setQuery] = useState("");
 
   const newMateriales = filterMateriales(materiales, query);
   const paginationHelper = new PaginationHelper(newMateriales, 2, currentPage);
-  console.log("PAGE INDEX: ", paginationHelper.pageIndex);
+  const enableSearch = Array.isArray(materiales) && materiales.length > 0;
+  // console.log("PAGE INDEX: ", paginationHelper.pageIndex);
   return (
     <>
       <CampusPicker 
@@ -39,6 +40,7 @@ function App() {
         fetchBodegas={fetchBodegas}
         setSelectedBodega={setSelectedBodega}
         resetMateriales={resetMateriales}
+        resetPage={resetPage}
       />
       <BodegaPicker
         bodegas={bodegas}
@@ -46,13 +48,15 @@ function App() {
         setSelectedBodega={setSelectedBodega}
         selectedCampus={selectedCampus}
         fetchMateriales={fetchMateriales}
+        resetPage={resetPage}
       />
       <MaterialSearcher 
         query={query} 
-        setQuery={setQuery} 
+        setQuery={setQuery}
+        enableSearch={enableSearch}
       />
       <MaterialTable materiales={newMateriales} query={query} paginationHelper={paginationHelper} />
-      <PageSwitcher paginationHelper={paginationHelper} nextPage={nextPage} previousPage={previousPage} /> 
+      <PageSwitcher paginationHelper={paginationHelper} nextPage={nextPage} previousPage={previousPage} resetPage={resetPage} /> 
     </>
   )
 }

@@ -8,7 +8,7 @@ export default class PaginationHelper {
     }
 
     private static correct(a: number) {
-        console.log("PRE-CORRECTED PAGE INDEX: ", a);
+        // console.log("PRE-CORRECTED PAGE INDEX: ", a);
         if (Number.isNaN(a)) {
             return 0;
         }

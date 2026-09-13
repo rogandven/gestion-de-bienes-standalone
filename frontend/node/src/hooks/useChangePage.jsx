@@ -11,7 +11,11 @@ export const useChangePage = () => {
         setCurrentPage(currentPage - 1);
     }
 
-    return [currentPage, nextPage, previousPage];
+    const resetPage = () => {
+        setCurrentPage(0);
+    }
+
+    return [currentPage, nextPage, previousPage, resetPage];
 }
 
 export default useChangePage;

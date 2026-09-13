@@ -2,10 +2,11 @@ import { useState } from "react";
 import { DEFAULT_BODEGA_ID } from "../constants/bodega.constants";
 import { DEBUG_PRINTS } from "../constants/config.constants";
 
-function BodegaPicker({ bodegas, selectedBodega, setSelectedBodega, selectedCampus, fetchMateriales }) {
+function BodegaPicker({ bodegas, selectedBodega, setSelectedBodega, selectedCampus, fetchMateriales, resetPage }) {
   const handleChange = (e) => {
     setSelectedBodega(e.target.value);
     fetchMateriales(e.target.value);
+    resetPage();
   }
   
   return (
@@ -20,7 +21,6 @@ function BodegaPicker({ bodegas, selectedBodega, setSelectedBodega, selectedCamp
             })}
         </select>
       }
-      <p>{DEBUG_PRINTS && `BODEGA_PICKER: ${selectedBodega} seleccionado`}</p>
     </>
   )
 }

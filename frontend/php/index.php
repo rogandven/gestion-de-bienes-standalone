@@ -14,24 +14,24 @@
         <?= $tags->css ?>
     </head>
     <body>
-        <div>
+        <!-- <div>
         <?php
-            echo "<p>La fecha es " . date("Y-m-d") . "</p>";
+            // echo "<p>La fecha es " . date("Y-m-d") . "</p>";
         ?>
 
         <p><?php
-            echo "Código de estado: " . $APIResponse->statusCode;
+            // echo "Código de estado: " . $APIResponse->statusCode;
         ?></p>
 
         <p><?php
-            echo "Mensaje: " . $APIResponse->message;
+            // echo "Mensaje: " . $APIResponse->message;
         ?></p>
 
         <p><?php
-            echo ($APIResponse->data != NULL ? "Hay datos" : "No hay datos");
+            // echo ($APIResponse->data != NULL ? "Hay datos" : "No hay datos");
         ?></p>        
 
-        </div>
+        </div> -->
         <div id="root"></div>
         <?= $tags->js ?>
     </body>

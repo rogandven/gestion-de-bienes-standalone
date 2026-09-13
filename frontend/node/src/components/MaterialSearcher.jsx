@@ -3,6 +3,7 @@ import { useState } from "react";
 function MaterialSearcher({ 
     query,
     setQuery,
+    enableSearch,
 }) {
     const handleChange = (e) => {
         setQuery(e.target.value);
@@ -10,7 +11,7 @@ function MaterialSearcher({
 
     return (
         <>
-            <input type="text" id="material-search" value={query} onChange={handleChange} placeholder="Buscar..."></input>
+            <input type="text" id="material-search" disabled={!enableSearch} value={query} onChange={handleChange} placeholder="Buscar..."></input>
         </>
     )
 }
