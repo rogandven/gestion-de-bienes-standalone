@@ -16,6 +16,7 @@ import { filterMateriales } from "./utils/material.utils.js";
 
 import PaginationHelper from "./classes/PaginationHelper.js";
 import PageSwitcher from "./components/PageSwitcher.jsx";
+import { ITEMS_PER_PAGE } from "./constants/config.constants.js";
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
   const [query, setQuery] = useState("");
 
   const newMateriales = filterMateriales(materiales, query);
-  const paginationHelper = new PaginationHelper(newMateriales, 2, currentPage);
+  const paginationHelper = new PaginationHelper(newMateriales, ITEMS_PER_PAGE, currentPage);
   const enableSearch = Array.isArray(materiales) && materiales.length > 0;
   // console.log("PAGE INDEX: ", paginationHelper.pageIndex);
   return (
