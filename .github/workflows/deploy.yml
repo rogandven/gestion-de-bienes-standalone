@@ -15,4 +15,4 @@ jobs:
 
       - name: Iniciar el cluster de contenedores
         run: |
-          cp /home/talleruser24/.env ./.env && docker-compose up -d --build && echo "¡Cluster iniciado con éxito!"
+          cp /home/talleruser24/.env ./.env && docker compose up -d --build && echo "¡Cluster iniciado con éxito!"
