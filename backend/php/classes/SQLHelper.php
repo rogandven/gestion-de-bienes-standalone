@@ -14,6 +14,10 @@
 
             $arr = array();
 
+            if (!$formattedQuery) {
+                die(print_r( sqlsrv_errors(), true));
+            }
+
             while ($current = sqlsrv_fetch_array($formattedQuery, SQLSRV_FETCH_ASSOC)) {
                 // echo "CURRENT: " . print_r($current, true) . "\n";
                 array_push($arr, $current);
