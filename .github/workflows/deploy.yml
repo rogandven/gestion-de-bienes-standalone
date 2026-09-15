@@ -15,4 +15,4 @@ jobs:
 
       - name: Iniciar el cluster de contenedores
         run: |
-          docker compose up -d && echo "¡Cluster iniciado con éxito!"
+          docker-compose up -d --build && echo "¡Cluster iniciado con éxito!"
